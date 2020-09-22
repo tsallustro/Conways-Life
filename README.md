@@ -1,4 +1,4 @@
-# Conways-Life
+# Conways Life
 My Implementation of Conway's Game of Life
 
 This program is my implementation of Conway's Game of Life (https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), a simple chaotic 
