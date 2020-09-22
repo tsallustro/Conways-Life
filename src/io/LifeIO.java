@@ -22,8 +22,10 @@ public class LifeIO {
 	private static void promptForSize(Scanner in) {
 		System.out.println("Input x size: ");
 		CellMap.XSIZE = in.nextInt();
+		in.nextLine(); //consume the newline character
 		System.out.println("Input y size: ");
 		CellMap.YSIZE = in.nextInt();
+		in.nextLine();  //consume the newline character
 
 	}
 
@@ -37,6 +39,7 @@ public class LifeIO {
 			System.out.println("3. Add a pulsar");
 			System.out.println("4. Add a single cell");
 			int choice = in.nextInt();
+			in.nextLine();  //consume the newline character
 			switch (choice) {
 				case 1: {
 					System.out.println("Starting the simulation...");
@@ -46,24 +49,36 @@ public class LifeIO {
 
 					System.out.println("Add a glider at what x: ");
 					int x = in.nextInt();
+					in.nextLine();  //consume the newline character
+
 					System.out.println("And at what y: ");
 					int y = in.nextInt();
+					in.nextLine();  //consume the newline character
+
 					map.buildGliderAt(x, y);
 					break;
 				}
 				case 3: {
 					System.out.println("Add a pulsar at what x: ");
 					int x = in.nextInt();
+					in.nextLine();  //consume the newline character
+
 					System.out.println("And at what y: ");
 					int y = in.nextInt();
+					in.nextLine();  //consume the newline character
+
 					map.buildPulsarAt(x, y);
 					break;
 				}
 				case 4: {
 					System.out.println("Add a single cell at what x: ");
 					int x = in.nextInt();
+					in.nextLine();  //consume the newline character
+
 					System.out.println("And at what y: ");
 					int y = in.nextInt();
+					in.nextLine();  //consume the newline character
+
 					map.setCell(x, y, true);
 					break;
 				}
@@ -98,18 +113,16 @@ public class LifeIO {
 				y++;
 			}
 			csvReader.close();
-			in.close();
 
 		} catch (IOException e) {
-			System.err.println("Reading file. See stack trace for more");
+			System.err.println("Error reading file. See stack trace for more");
 			e.printStackTrace();
 		}
 		return CELLMAP;
 	}
 
-	public static CellMap startPrompt() {
+	public static CellMap startPrompt(Scanner in) {
 		CellMap map = new CellMap();
-		Scanner in = new Scanner(System.in);
 		promptForSize(in);
 		System.out.println("What would you like to do: ");
 		int choice = -1;
@@ -119,31 +132,31 @@ public class LifeIO {
 			System.out.println("2. Build a custom map");
 			System.out.println("3. Start from a file");
 			choice = in.nextInt();
+			in.nextLine();  //consume the newline character
 
 			switch (choice) {
 				case 1: {
 					System.out.println("Randomizing...");
 					map.randomize();
-					in.close();
-					return map;
+					break;
 				}
 				case 2: {
 					map = promptForCustom(in);
-					in.close();
-					return map;
+					break;
+					
 				}
 				case 3: {
 
 					map = promptForInput(in);
-					in.close();
-					return map;
+					break;
+					
 				}
 				default: {
 					System.out.println("Invalid choice");
+					break;
 				}
 			}
 		} while (choice <= 0 || choice > 3);
-		in.close();
 		return map;
 	}
 

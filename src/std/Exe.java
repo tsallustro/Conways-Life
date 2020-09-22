@@ -1,6 +1,6 @@
 package std;
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,10 +9,13 @@ import javax.swing.SwingUtilities;
 import io.LifeIO;
 
 public class Exe {
-	public static final CellMap MAP = LifeIO.startPrompt();
+	public static CellMap MAP;
 	public static Window win;
 
 	public static void main(String[] args) {
+		Scanner sysIn = new Scanner(System.in);
+		MAP = LifeIO.startPrompt(sysIn);
+		
 		win = new Window();
 		Timer t = new Timer();
 		t.schedule(new Runner(), 1000, 500);
