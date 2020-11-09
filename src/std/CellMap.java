@@ -1,4 +1,5 @@
 package std;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -47,11 +48,14 @@ public class CellMap {
 	 * @param x         X position
 	 * @param y         Y position
 	 * @param newStatus The new status of the cell
+	 * @return true if (x,y) is valid, false otherwise
 	 */
-	public void setCell(int x, int y, boolean newStatus) {
+	public boolean setCell(int x, int y, boolean newStatus) {
 		if (isValid(x, y)) {
 			this.map[x][y] = newStatus;
+			return true;
 		}
+		return false;
 	}
 
 	public void clear() {
@@ -85,9 +89,21 @@ public class CellMap {
 	/**
 	 * Builds a gilder shape. This pattern "lives" in a 3x3 area and as such
 	 * requires {@code XSIZE >=3 && YSIZE >=3} to work properly.
+	 * 
+	 * @return true if (x,y) is valid, false otherwise
 	 */
-	public void buildGlider() {
-		buildGliderAt(0,0);
+	public boolean buildGlider() {
+		return buildGliderAt(0, 0);
+	}
+	
+	/**
+	 * Builds a pulsar shape. This pattern "lives" in a 3x3 area and as such
+	 * requires {@code XSIZE >=3 && YSIZE >=3} to work properly.
+	 * 
+	 * @return true if (x,y) is valid, false otherwise
+	 */
+	public boolean buildPulsar() {
+		return buildPulsarAt(0, 0);
 	}
 
 	/**
@@ -96,79 +112,90 @@ public class CellMap {
 	 * 
 	 * @param x X coordinate to build the glider at.
 	 * @param y Y coordinate to build the glider at
+	 * @return true if (x,y) is valid, false otherwise
 	 */
-	public void buildGliderAt(int x, int y) {
-		this.setCell(x + 1, y, true);
-		this.setCell(x + 2, y + 1, true);
-		this.setCell(x + 2, y + 2, true);
-		this.setCell(x + 1, y + 2, true);
-		this.setCell(x, y + 2, true);
+	public boolean buildGliderAt(int x, int y) {
+		if (isValid(x, y)) {
+			this.setCell(x + 1, y, true);
+			this.setCell(x + 2, y + 1, true);
+			this.setCell(x + 2, y + 2, true);
+			this.setCell(x + 1, y + 2, true);
+			this.setCell(x, y + 2, true);
+			return true;
+		}
+		return false;
 	}
 
 	/**
 	 * This method requires {@code x+15 < XSIZE && y+15 < YSIZE} to work properly.
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x X coordinate to build the pulsar at.
+	 * @param y Y coordinate to build the pulsar at
+	 * @return true if (x,y) is valid, false otherwise
 	 */
-	public void buildPulsarAt(int x, int y) {
-		this.setCell(x + 2, y, true);
-		this.setCell(x + 3, y, true);
-		this.setCell(x + 4, y, true);
-		this.setCell(x + 8, y, true);
-		this.setCell(x + 9, y, true);
-		this.setCell(x + 10, y, true);
+	public boolean buildPulsarAt(int x, int y) {
+		if (isValid(x, y)) {
+			this.setCell(x + 2, y, true);
 
-		this.setCell(x, y + 2, true);
-		this.setCell(x + 5, y + 2, true);
-		this.setCell(x + 7, y + 2, true);
-		this.setCell(x + 12, y + 2, true);
+			this.setCell(x + 3, y, true);
+			this.setCell(x + 4, y, true);
+			this.setCell(x + 8, y, true);
+			this.setCell(x + 9, y, true);
+			this.setCell(x + 10, y, true);
 
-		this.setCell(x, y + 3, true);
-		this.setCell(x + 5, y + 3, true);
-		this.setCell(x + 7, y + 3, true);
-		this.setCell(x + 12, y + 3, true);
+			this.setCell(x, y + 2, true);
+			this.setCell(x + 5, y + 2, true);
+			this.setCell(x + 7, y + 2, true);
+			this.setCell(x + 12, y + 2, true);
 
-		this.setCell(x, y + 4, true);
-		this.setCell(x + 5, y + 4, true);
-		this.setCell(x + 7, y + 4, true);
-		this.setCell(x + 12, y + 4, true);
+			this.setCell(x, y + 3, true);
+			this.setCell(x + 5, y + 3, true);
+			this.setCell(x + 7, y + 3, true);
+			this.setCell(x + 12, y + 3, true);
 
-		this.setCell(x + 2, y + 5, true);
-		this.setCell(x + 3, y + 5, true);
-		this.setCell(x + 4, y + 5, true);
-		this.setCell(x + 8, y + 5, true);
-		this.setCell(x + 9, y + 5, true);
-		this.setCell(x + 10, y + 5, true);
+			this.setCell(x, y + 4, true);
+			this.setCell(x + 5, y + 4, true);
+			this.setCell(x + 7, y + 4, true);
+			this.setCell(x + 12, y + 4, true);
 
-		this.setCell(x + 2, y + 7, true);
-		this.setCell(x + 3, y + 7, true);
-		this.setCell(x + 4, y + 7, true);
-		this.setCell(x + 8, y + 7, true);
-		this.setCell(x + 9, y + 7, true);
-		this.setCell(x + 10, y + 7, true);
+			this.setCell(x + 2, y + 5, true);
+			this.setCell(x + 3, y + 5, true);
+			this.setCell(x + 4, y + 5, true);
+			this.setCell(x + 8, y + 5, true);
+			this.setCell(x + 9, y + 5, true);
+			this.setCell(x + 10, y + 5, true);
 
-		this.setCell(x, y + 8, true);
-		this.setCell(x + 5, y + 8, true);
-		this.setCell(x + 7, y + 8, true);
-		this.setCell(x + 12, y + 8, true);
+			this.setCell(x + 2, y + 7, true);
+			this.setCell(x + 3, y + 7, true);
+			this.setCell(x + 4, y + 7, true);
+			this.setCell(x + 8, y + 7, true);
+			this.setCell(x + 9, y + 7, true);
+			this.setCell(x + 10, y + 7, true);
 
-		this.setCell(x, y + 9, true);
-		this.setCell(x + 5, y + 9, true);
-		this.setCell(x + 7, y + 9, true);
-		this.setCell(x + 12, y + 9, true);
+			this.setCell(x, y + 8, true);
+			this.setCell(x + 5, y + 8, true);
+			this.setCell(x + 7, y + 8, true);
+			this.setCell(x + 12, y + 8, true);
 
-		this.setCell(x, y + 10, true);
-		this.setCell(x + 5, y + 10, true);
-		this.setCell(x + 7, y + 10, true);
-		this.setCell(x + 12, y + 10, true);
+			this.setCell(x, y + 9, true);
+			this.setCell(x + 5, y + 9, true);
+			this.setCell(x + 7, y + 9, true);
+			this.setCell(x + 12, y + 9, true);
 
-		this.setCell(x + 2, y + 12, true);
-		this.setCell(x + 3, y + 12, true);
-		this.setCell(x + 4, y + 12, true);
-		this.setCell(x + 8, y + 12, true);
-		this.setCell(x + 9, y + 12, true);
-		this.setCell(x + 10, y + 12, true);
+			this.setCell(x, y + 10, true);
+			this.setCell(x + 5, y + 10, true);
+			this.setCell(x + 7, y + 10, true);
+			this.setCell(x + 12, y + 10, true);
+
+			this.setCell(x + 2, y + 12, true);
+			this.setCell(x + 3, y + 12, true);
+			this.setCell(x + 4, y + 12, true);
+			this.setCell(x + 8, y + 12, true);
+			this.setCell(x + 9, y + 12, true);
+			this.setCell(x + 10, y + 12, true);
+			return true;
+		}
+		return false;
 
 	}
 
@@ -267,5 +294,4 @@ public class CellMap {
 		return true;
 	}
 
-	
 }
