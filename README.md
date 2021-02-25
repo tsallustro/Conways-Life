@@ -21,14 +21,3 @@ From file: The program will read a CSV file with to build the simulation. If the
            the rest of the field will be populated with dead (false) cells. Likewise, if the file is too big, it will cut off any values that
            will not fit. Values in the CSV file must be either "TRUE" or "FALSE". An example is shown in the file test.csv
            
-## File Overview
-
-test.csv: An example CSV file for reading a start from a file
-
-### src:
-#### std: The standard folder
-This folder contains the main classes: CellMap, an object that keeps keeps track of the status of all cells; GameArea, an extension of JPanel that the data contained in the main CellMap is painted on; Window, a separate class for the JFrame containing all of the graphical elements; and Exe, the location of the `main()` method and the main CellMap (`public static CellMap MAP`).
-
-#### io:
-This package only contains 1 class, LifeIO, which is dedicated to prompting the user for input on start.
-    
